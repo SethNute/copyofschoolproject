@@ -14,6 +14,7 @@
 - User spends a coin to bump a song one position up the playlist
 - User starts tuning into the playlist (listening to whatever is playing)
 - User stops tuning into the playlist
+- Song user added just played and user gets 1 coin added to their account
 
 
 ##Non-Functional Requirements (Need >= 4 of these)
