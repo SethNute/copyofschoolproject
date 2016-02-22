@@ -412,30 +412,33 @@ Frequency of occurrence: often depending on user discretion
 
 
 
-Use Case 14.) Users can look at other users profiles and statistics
+
+Use Case 14.) Users can click another user's name from chat or leaderboard to go to their profile
 ------------------
+
 Primary Actor: User
 
-Stakeholders and interests: System Admin, User, User who's profile is being looked at
+Stakeholders and interests: User
 
-Preconditions: Users need to be logged in, Must be on a playlist, Must click on a valid user
+Preconditions: User must be logged in and on the leaderboard page or playlist page
 
-Success Guarantees: The user who's name was clicked profile and statistics
+Success Guarantees: The user can see the profile of the user clicked
 
 Main success scenario:
-  1. User is in a playlist of their choosing
-  2. User clicks on a username
-  3. That user's profile is brought up without interrupting the stream
+  1. User is logged in and on leaderboard page or playlist page
+  2. User clicks a user name from that page
+  3. The profile of the clicked user is shown
 
-Extensions:
-  2. User clicks on the wrong username
-    2a.) close the popup and user can click the proper user
+Extensions: n/a
 
 Special requirements: n/a
 
-Technology and data variation list: Mouse for clicking username
+Technology and data variation list: mouse for clicking username
 
 Frequency of occurrence: often at user discretion
+
+
+
 
 
 
@@ -490,33 +493,7 @@ Frequency of occurrence: often at user discretion
 
 
 
-Use Case 17.) Users can click another user's name from chat or leaderboard to go to their profile
-------------------
-
-Primary Actor: User
-
-Stakeholders and interests: User
-
-Preconditions: User must be logged in and on the leaderboard page or playlist page
-
-Success Guarantees: The user can see the profile of the user clicked
-
-Main success scenario:
-  1. User is logged in and on leaderboard page or playlist page
-  2. User clicks a user name from that page
-  3. The profile of the clicked user is shown
-
-Extensions: n/a
-
-Special requirements: n/a
-
-Technology and data variation list: mouse for clicking username
-
-Frequency of occurrence: often at user discretion
-
-
-
-Use Case 18.) User logs out of their account
+Use Case 17.) User logs out of their account
 --------------------
     Primary Actor: User
     
