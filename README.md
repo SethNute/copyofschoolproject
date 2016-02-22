@@ -31,3 +31,4 @@
 - Users data must be secure (usernames and passwords)
 - Song playlist should buffer smoothly for >90% of users
 - Song playback should be concurrent across all tuned in users
+- Chat is updated as messages come in
