@@ -1,0 +1,31 @@
+Seth Nute, Andrew Baehre, Tony DiMarco, Amit Ishairzay
+Intermediate Software Development Group Project
+Collaborative Music Player -  Fully Dressed Use-Case Model
+
+We need 16 of these use cases..
+
+Use Case 1.) Use Case Example
+--------------------
+
+	Primary Actor: Who is the main person interacting with the system in this use case
+	
+	Stakeholders and interests: Who are they and why are they interested
+	
+	Preconditions: State what must ALWAYS be true before the scenario can begin (ie: user is logged in)
+	
+	Success Guarantees: State what must ALWAYS be true at the end of the scenario (ie: receipt is printed)
+	
+	Main success scenario: List numbered steps from start to finish in best case success scenario, three kinds of steps
+		- Interaction between actors
+		- Validation (usually by system)
+		- State change by the system
+
+	Extensions: Look at each numbered step in the main success scenario and think of where this could branch out into either a failure or different type of success. Spell out each scenario in text
+	
+	Special requirements: Do any non-functional requirements relate specially to this use case? List them here if they exist
+	
+	Technology and data variation list: Basic technologies list. Ex: use a credit card scanner to scan cards
+	
+	Frequency of occurence: self explanatory
+
+

@@ -1,0 +1,9 @@
+Seth Nute, Andrew Baehre, Tony DiMarco, Amit Ishairzay
+Intermediate Software Development Group Project
+Collaborative Music Player - Supplementary Specifications
+
+We need at least 4 non-funtional requirements:
+
+Requirement 1.) Requirement Example
+-----------------------------------
+We want users to be able to load our webpage across all major browsers
