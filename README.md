@@ -9,8 +9,8 @@
 ##Functional Requirements (Need >= 16 of these)
 - Users need to be able to create accounts
 - Users need to be able to login to their accounts
-- User spends a coin to add a song to the playlist from youtube url
-- User spends a coin to add a song to the playlist from recommended youtube videos
+- User spends a coin to add a song to the playlist 
+- User spends a coin to add a song to the playlist from recommended songs
 - User spends a coin to bump a song one position up the playlist
 - User starts tuning into the playlist (listening to whatever is playing)
 - User stops tuning into the playlist
