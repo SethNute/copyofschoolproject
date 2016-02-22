@@ -1,9 +1,25 @@
 Seth Nute, Andrew Baehre, Tony DiMarco, Amit Ishairzay
 Intermediate Software Development Group Project
-Collaborative Music Player - Supplementary Specifications
+Collaborative Music Player
 
-We need at least 4 non-funtional requirements:
+Supplementary Specifications
 
-Requirement 1.) Requirement Example
+Non-Functional Requirement 1.) 
 -----------------------------------
 We want users to be able to load our webpage across all major browsers
+
+Non-Functional Requirement 2.)
+-----------------------------------
+We want all user data to be secure (both usernames and passwords).
+
+Non-Functional Requirement 3.)
+-----------------------------------
+We want the song playlists to buffer smoothly for more than 90 percent of users.
+
+Non-Functional Requirement 4.)
+-----------------------------------
+We want all playlists to be concurrent across all tuned in users.
+
+Non-Functional Requirement 5.)
+-----------------------------------
+We want the chat to be updated as soon as messages are sent.
