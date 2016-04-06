@@ -32,3 +32,11 @@
 - Song playlist should buffer smoothly for >90% of users
 - Song playback should be concurrent across all tuned in users
 - Chat is updated as messages come in
+
+##Development
+- Clone the repository
+- Change directories to src
+- run the command, '''npm install'''
+- start mongo by using the command, '''mongod --fork --syslog'''
+- run the command, '''npm start'''
+- head to localhost:8080 to view the web app
