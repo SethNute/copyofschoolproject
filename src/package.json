@@ -4,8 +4,11 @@
   },
   "dependencies": {
     "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
     "express": "^4.13.4",
     "jsonwebtoken": "^5.7.0",
-    "mongoose": "^4.4.10"
+    "mocha": "^2.4.5",
+    "mongoose": "^4.4.10",
+    "supertest": "^1.2.0"
   }
 }

@@ -59,7 +59,7 @@ api.newUser = function(req, res, next) {
       // user already exists failed request.
       res.status(400);
     } else {
-      var newUser = new User({
+      var newUser = new user({
         email: email,
         username: username,
         password: password,
