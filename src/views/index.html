@@ -1,35 +1,73 @@
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <script src="/public/helpers.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="helpers.js"></script>
+
+  <script type="text/javascript">
+    var username;
+    var email; 
+
+    $(document).ready(function () {
+        addButtonListeners();
+
+        if (isUserLoggedIn()) {
+            styleForLoggedInUser();
+        }
+    });
+
+    function addButtonListeners() {
+        $("#login-button").click(function(e) {
+            createNewUser("sethnutessssssssss@gmail.com", "sethssssss", "passwordssssss");
+        }); 
+    }
+
+    function createNewUser(email, username, password) {
+        var request = $.ajax({
+            type: "POST",
+            url: "/users",
+            data: {"email": email, "username": username, "password": password},
+            success: function (response) {
+                logUserIn(email, password);
+            }
+        });
+    }
+
+    function logUserIn(email, password) {
+        var request = $.ajax({
+            type: "POST",
+            url: "/users/login",
+            data: {"email": email, "password": password},
+            success: function (response) {
+                localStorage.setItem("sessionToken", response.token);
+                //styleForLoggedInUser();
+            }
+        });
+    }
+
+    function getUserInfo(token) {
+        var request = $.ajax({
+            type: "POST",
+            url: "/user",
+            data: {"token": token},
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    }
+
+    function isUserLoggedIn() {
+        return localStorage.getItem("sessionToken") !== null;
+    }
+
+    function styleForLoggedInUser() {
+        console.log("Do the styling here");
+    }
+  </script>
 </head>
 
 <body>
   <h2>Collaborative Music Player!</h2>
 
-  <button>Login/Register</button>
-
-  <script type="text/javascript">
-    var sessionToken = null;
-    console.log(window.location.pathname);
-
-    //by including script at bottom of body will wait for dom to load
-    pageLoaded();
-
-    function pageLoaded() {
-        if (sessionTokenIsValid()) {
-            styleForLoggedInUser();
-        }
-    }   
-
-    function sessionTokenIsValid() {
-        if (hasSessionToken()) {
-            return false;
-        }
-    }
-
-    function hasSessionToken() {
-        return sessionToken != null;
-    }
-  </script>
+  <button id="login-button">Login/Register</button>
 </body>
