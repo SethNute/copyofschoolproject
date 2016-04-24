@@ -23,7 +23,7 @@ api.verifyUser = function(req, res, next) {
 }
 
 api.getUser = function(req, res, next) {
-  res.json(req.user._doc);
+  res.json(req.user);
 }
 
 api.logIn = function(req, res, next) {

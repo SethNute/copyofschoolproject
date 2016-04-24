@@ -6,7 +6,9 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
+        //clear forms
         $(':input').val('');
+
         addButtonListeners();
 
         if (isUserLoggedIn()) {
@@ -36,6 +38,9 @@
             success: function (response) {
                 localStorage.setItem("sessionToken", response.token);
                 getUserInfo(localStorage.getItem("sessionToken"));
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                styleForIncorrectUsernameOrPassword();
             }
         });
     }
@@ -47,6 +52,9 @@
             data: {"email": email, "username": username, "password": password},
             success: function (response) {
                 logUserIn(email, password);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                styleForUserAlreadyExists();
             }
         });
     }
@@ -84,24 +92,50 @@
         $('#login-or-register-container').hide();
         $('#logout-button').show();
     }
+
+    function styleForIncorrectUsernameOrPassword() {
+        console.log("in here");
+        $('#login-container').children('input').each(function () {
+            $(this).addClass('error-shadow');
+        });
+    }
+
+    function styleForUserAlreadyExists() {
+        console.log("in here 2");
+        $('#register-container').children('input').each(function () {
+            $(this).addClass('error-shadow');
+        });
+    }
   </script>
+
+  <style>
+    .error-shadow {
+        -moz-box-shadow:    inset 0 0 15px red !important;
+        -webkit-box-shadow: inset 0 0 15px red !important;
+        box-shadow:         inset 0 0 15px red !important;
+    }
+  </style>
 </head>
 
 <body>
   <h2>Collaborative Music Player!</h2>
 
   <div id="login-or-register-container">
-    <input placeholder="Email" type="text" id="login-email-input"></input>
-    <input placeholder="Password" type="text" id="login-password-input"></input>
-    <button id="login-button">Login</button>
+    <div id="login-container">
+        <input placeholder="Email" type="text" id="login-email-input"></input>
+        <input placeholder="Password" type="text" id="login-password-input"></input>
+        <button id="login-button">Login</button>
+    </div>
 
     <br>
     <br>
 
-    <input placeholder="Email" type="text" id="register-email-input"></input>
-    <input placeholder="Desired Username" type="text" id="register-username-input"></input>
-    <input placeholder="Password" type="text" id="register-password-input"></input>
-    <button id="register-button">Register</button>
+    <div id="register-container">
+        <input placeholder="Email" type="text" id="register-email-input"></input>
+        <input placeholder="Desired Username" type="text" id="register-username-input"></input>
+        <input placeholder="Password" type="text" id="register-password-input"></input>
+        <button id="register-button">Register</button>
+    </div>
   </div>
   
   <button id="logout-button"  style="display:none">Logout</button>
