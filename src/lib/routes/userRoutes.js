@@ -20,6 +20,10 @@ api.verifyUser = function(req, res, next) {
   }
 }
 
+api.getUser = function(req, res, next) {
+  res.json(req.user);
+}
+
 api.logIn = function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
