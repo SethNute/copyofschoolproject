@@ -25,6 +25,7 @@ var userAPI = require(__dirname + '/lib/routes/userRoutes');
 app.post('/user', userAPI.verifyUser, userAPI.getUser);
 app.get('/users', userAPI.getUsers);
 app.post('/users', userAPI.newUser);
+app.post('/users/login', userAPI.logIn);
 app.put('/users/:id', userAPI.verifyUser, userAPI.updateUser);
 app.delete('/users/:id', userAPI.verifyUser, userAPI.deleteUser);
 
