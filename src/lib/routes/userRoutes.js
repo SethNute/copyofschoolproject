@@ -44,6 +44,19 @@ api.logIn = function(req, res, next) {
   });
 }
 
+api.getLeaderboard = function(req, res, next) {
+  user.find({})
+  .select('_id username password coins')
+  .sort('-coins')
+  .exec(function(err, users) {
+    if(err) {
+      res.status(400).json({});
+    } else {
+      res.send(users);
+    }
+  });
+}
+
 api.getUsers = function(req, res, next) {
   user.find({})
   .select('_id username password coins')

@@ -24,6 +24,7 @@ app.get('/', function(req, res, next) {
 var userAPI = require(__dirname + '/lib/routes/userRoutes');
 app.post('/user', userAPI.verifyUser, userAPI.getUser);
 app.get('/users', userAPI.getUsers);
+app.get('/leaderboard', userAPI.getLeaderboard);
 app.post('/users', userAPI.newUser);
 app.post('/users/login', userAPI.logIn);
 app.put('/users/:id', userAPI.verifyUser, userAPI.updateUser);
