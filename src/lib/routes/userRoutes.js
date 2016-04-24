@@ -1,4 +1,5 @@
 var user = require('../schemas/userSchema');
+var secret = 'supersecretencryptionkey!!!'
 
 var api = {};
 var jwt = require('jsonwebtoken');
@@ -6,7 +7,7 @@ var jwt = require('jsonwebtoken');
 api.verifyUser = function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
   if(token) {
-    jwt.verify(token, app.get('secret'), function(err, decoded) {
+    jwt.verify(token, secret, function(err, decoded) {
       if(err) {
         // not logged in.
         res.status(400);
@@ -34,7 +35,7 @@ api.logIn = function(req, res, next) {
       //failed to log in
       res.status(400);
     } else {
-      var token = jwt.sign(_user, app.get('secret'),{
+      var token = jwt.sign(user, secret,{
         expiresInMinutes: 60
       });
       res.status(200).json({token: token});
