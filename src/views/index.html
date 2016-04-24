@@ -73,6 +73,17 @@
         });
     }
 
+    function getLeaderboards() {
+        var request = $.ajax({
+            type: "GET",
+            url: "/users",
+            success: function (response) {
+                console.log(response);
+                styleLeaderboardFor(response);
+            }
+        });
+    }
+
     function logUserOut() {
         localStorage.removeItem("sessionToken");
         localStorage.removeItem("username");
@@ -92,17 +103,39 @@
 
         $('#login-or-register-container').hide();
         $('#logout-button').show();
+
+        getLeaderboards();
+    }
+
+    function styleLeaderboardFor(users) {
+        $('#user-info').append(
+            $('<br><hr><br>' +
+              '<h1 style="text-align:center">Leaderboards</h1>' +
+              '<table id="leaderboards-table"><tr><th>Rank</th><th>Username</th><th>Coins</th></tr></table>')
+        );
+
+        var rank = 1;
+        users.forEach(function(user) {
+            if (user.username && user.coins) {
+                addLeaderboardRow(rank, user.username, user.coins);
+                rank++;
+            }
+        }); 
+    }
+
+    function addLeaderboardRow(rank, username, coins) {
+        $('#leaderboards-table').append(
+            $('<tr><td>' + rank + '</td><td>' + username + '</td><td>' + coins + '</tr>')
+        );
     }
 
     function styleForIncorrectUsernameOrPassword() {
-        console.log("in here");
         $('#login-container').children('input').each(function () {
             $(this).addClass('error-shadow');
         });
     }
 
     function styleForUserAlreadyExists() {
-        console.log("in here 2");
         $('#register-container').children('input').each(function () {
             $(this).addClass('error-shadow');
         });
@@ -115,7 +148,17 @@
         -webkit-box-shadow: inset 0 0 15px red !important;
         box-shadow:         inset 0 0 15px red !important;
     }
-  </style>
+
+    #leaderboards-table > tbody > tr > th {
+        width: 33%;
+        text-align: center;
+    }
+
+    #leaderboards-table > tbody > tr > td {
+        width: 33%;
+        text-align: center;
+    }  
+    </style>
 </head>
 
 <body>
