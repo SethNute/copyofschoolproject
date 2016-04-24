@@ -1,8 +1,35 @@
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <script src="/public/helpers.js"></script>
 </head>
 
 <body>
   <h2>Collaborative Music Player!</h2>
+
+  <button>Login/Register</button>
+
+  <script type="text/javascript">
+    var sessionToken = null;
+    console.log(window.location.pathname);
+
+    //by including script at bottom of body will wait for dom to load
+    pageLoaded();
+
+    function pageLoaded() {
+        if (sessionTokenIsValid()) {
+            styleForLoggedInUser();
+        }
+    }   
+
+    function sessionTokenIsValid() {
+        if (hasSessionToken()) {
+            return false;
+        }
+    }
+
+    function hasSessionToken() {
+        return sessionToken != null;
+    }
+  </script>
 </body>
