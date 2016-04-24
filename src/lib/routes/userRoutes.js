@@ -10,7 +10,7 @@ api.verifyUser = function(req, res, next) {
     jwt.verify(token, secret, function(err, decoded) {
       if(err) {
         // not logged in.
-        res.status(400);
+        res.status(400).json({});
       }
       req.user = decoded._doc;
       delete req.user.password;
@@ -18,7 +18,7 @@ api.verifyUser = function(req, res, next) {
     });
   } else {
     // did not receive a token.
-    res.status(403);
+    res.status(403).json({});
   }
 }
 
@@ -34,7 +34,7 @@ api.logIn = function(req, res, next) {
   }, function(err, user) {
     if(err || !user || user.password !== password) {
       //failed to log in
-      res.status(400);
+      res.status(400).json({});
     } else {
       var token = jwt.sign(user, secret,{
         expiresInMinutes: 60
@@ -49,7 +49,7 @@ api.getUsers = function(req, res, next) {
   .select('_id username password coins')
   .exec(function(err, users) {
     if(err) {
-      res.status(400);
+      res.status(400).json({});
     } else {
       res.send(users);
     }
@@ -63,7 +63,7 @@ api.newUser = function(req, res, next) {
   user.findOne({$or: [{email: email}, {username:username}]}, function(err, result) {
     if(result) {
       // user already exists failed request.
-      res.status(400);
+      res.status(400).json({});
     } else {
       var newUser = new user({
         email: email,
@@ -74,7 +74,7 @@ api.newUser = function(req, res, next) {
       newUser.save(function(err) {
         if(err) {
           // couldn't save user for some reason
-          res.status(400);
+          res.status(400).json({});
         } else {
           delete newUser.password;
           res.status(200).json(newUser);
@@ -89,9 +89,10 @@ api.deleteUser = function(req, res, next) {
   user.remove({_id:id}, function(err) {
     if(err) {
       // error removing user.
+      res.status(400).json({});
     } else {
       // user removed
-      res.status(204);
+      res.status(204).json({});
     }
   });
 };
@@ -102,7 +103,7 @@ api.updateUser = function(req, res, next) {
   user.update({_id:id}, newUser, function(err, result) {
     if(err) {
       // unable to update user.
-      res.status(400);
+      res.status(400).json({});
     } else {
       res.status(200).json(newUser);
     }
