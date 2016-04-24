@@ -12,7 +12,8 @@ api.verifyUser = function(req, res, next) {
         // not logged in.
         res.status(400);
       }
-      req.user = decoded;
+      req.user = decoded._doc;
+      delete req.user.password;
       next();
     });
   } else {
@@ -59,7 +60,7 @@ api.newUser = function(req, res, next) {
   var email = req.body.email;
   var username = req.body.username;
   var password = req.body.password;
-  user.findOne({email: email}, function(err, result) {
+  user.findOne({$or: [{email: email}, {username:username}]}, function(err, result) {
     if(result) {
       // user already exists failed request.
       res.status(400);
