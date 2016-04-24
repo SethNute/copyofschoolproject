@@ -5,21 +5,39 @@
   <script src="helpers.js"></script>
 
   <script type="text/javascript">
-    var username;
-    var email; 
-
     $(document).ready(function () {
+        $(':input').val('');
         addButtonListeners();
 
         if (isUserLoggedIn()) {
-            styleForLoggedInUser();
+            getUserInfo(localStorage.getItem("sessionToken"));
         }
     });
 
     function addButtonListeners() {
         $("#login-button").click(function(e) {
-            createNewUser("sethnutessssssssss@gmail.com", "sethssssss", "passwordssssss");
+            logUserIn($("#login-email-input").val(), $("#login-password-input").val());
         }); 
+
+        $("#register-button").click(function(e) {
+            createNewUser($("#register-email-input").val(), $("#register-username-input").val(), $("#register-password-input").val());
+        }); 
+
+        $('#logout-button').click(function(e) {
+            logUserOut();
+        });
+    }
+
+    function logUserIn(email, password) {
+        var request = $.ajax({
+            type: "POST",
+            url: "/users/login",
+            data: {"email": email, "password": password},
+            success: function (response) {
+                localStorage.setItem("sessionToken", response.token);
+                getUserInfo(localStorage.getItem("sessionToken"));
+            }
+        });
     }
 
     function createNewUser(email, username, password) {
@@ -33,27 +51,26 @@
         });
     }
 
-    function logUserIn(email, password) {
-        var request = $.ajax({
-            type: "POST",
-            url: "/users/login",
-            data: {"email": email, "password": password},
-            success: function (response) {
-                localStorage.setItem("sessionToken", response.token);
-                //styleForLoggedInUser();
-            }
-        });
-    }
-
     function getUserInfo(token) {
         var request = $.ajax({
             type: "POST",
             url: "/user",
             data: {"token": token},
             success: function (response) {
-                console.log(response);
+                localStorage.setItem("username", response.username);
+                localStorage.setItem("email", response.email);
+
+                styleForLoggedInUser();
             }
         });
+    }
+
+    function logUserOut() {
+        localStorage.removeItem("sessionToken");
+        localStorage.removeItem("username");
+        localStorage.removeItem("email");
+
+        location.reload();
     }
 
     function isUserLoggedIn() {
@@ -61,7 +78,11 @@
     }
 
     function styleForLoggedInUser() {
-        console.log("Do the styling here");
+        $('#user-info').append($('<p>' + localStorage.getItem("username") + 
+            '</p><p>' + localStorage.getItem("email") + '</p>'));
+
+        $('#login-or-register-container').hide();
+        $('#logout-button').show();
     }
   </script>
 </head>
@@ -69,5 +90,20 @@
 <body>
   <h2>Collaborative Music Player!</h2>
 
-  <button id="login-button">Login/Register</button>
+  <div id="login-or-register-container">
+    <input placeholder="Email" type="text" id="login-email-input"></input>
+    <input placeholder="Password" type="text" id="login-password-input"></input>
+    <button id="login-button">Login</button>
+
+    <br>
+    <br>
+
+    <input placeholder="Email" type="text" id="register-email-input"></input>
+    <input placeholder="Desired Username" type="text" id="register-username-input"></input>
+    <input placeholder="Password" type="text" id="register-password-input"></input>
+    <button id="register-button">Register</button>
+  </div>
+  
+  <button id="logout-button"  style="display:none">Logout</button>
+  <div id="user-info"></div>
 </body>
