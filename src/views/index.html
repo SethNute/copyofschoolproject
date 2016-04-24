@@ -86,6 +86,7 @@
     }
 
     function styleForLoggedInUser() {
+        console.log("style for logged in user");
         $('#user-info').append($('<p>' + localStorage.getItem("username") + 
             '</p><p>' + localStorage.getItem("email") + '</p>'));
 
