@@ -95,9 +95,9 @@ function styleForLoggedInUser() {
     $('#user-info').append($(
         '<h4>User Information</h4>' +
         '<div class="row">' +
-            '<p><b class="col s2">Username : </b><div class="col s10">' + localStorage.getItem("username") + 
-            '</div></p><p><b class="col s2">Email : </b><div class="col s10">' + localStorage.getItem("email") + '</div>' + 
-            '</p><p><b class="col s2">Coins : </b><div class="col s10">' + localStorage.getItem("coins") + '</div></p>' +
+            '<p><b class="col s2">Username : </b><div id="usernameText" class="col s10">' + localStorage.getItem("username") + 
+            '</div></p><p><b class="col s2">Email : </b><div id="emailText" class="col s10">' + localStorage.getItem("email") + '</div>' + 
+            '</p><p><b class="col s2">Coins : </b><div id="coinsText" class="col s10">' + localStorage.getItem("coins") + '</div></p>' +
         '</div>'));
 
     $('#user-info').append($(
