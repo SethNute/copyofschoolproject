@@ -27,8 +27,8 @@ app.get('/users', userAPI.getUsers);
 app.get('/leaderboard', userAPI.getLeaderboard);
 app.post('/users', userAPI.newUser);
 app.post('/users/login', userAPI.logIn);
-app.put('/users/:id', userAPI.verifyUser, userAPI.updateUser);
-app.delete('/users/:id', userAPI.verifyUser, userAPI.deleteUser);
+app.put('/users', userAPI.verifyUser, userAPI.updateUser);
+app.delete('/users', userAPI.verifyUser, userAPI.deleteUser);
 
 // Starts server
 http.listen(8080, function() {

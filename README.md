@@ -36,7 +36,13 @@
 ##Development
 - Clone the repository
 - Change directories to src
-- run the command, '''npm install'''
-- start mongo by using the command, '''mongod --fork --syslog'''
-- run the command, '''npm start'''
+- run the command, 'npm install'
+- start mongo on your machine by using the command, 'mongod --fork --syslog'
+- run the command, 'npm start'
 - head to localhost:8080 to view the web app
+
+##Use Case Testing
+- Perform the development setup above
+- Navigate to the src directory
+- Run the command, 'npm install -g mocha'
+- Run the command, 'mocha'

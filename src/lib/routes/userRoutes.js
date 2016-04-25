@@ -8,13 +8,15 @@ api.verifyUser = function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
   if(token) {
     jwt.verify(token, secret, function(err, decoded) {
-      if(err) {
+      if(err || !decoded) {
         // not logged in.
         res.status(400).json({});
       }
-      req.user = decoded._doc;
-      delete req.user.password;
-      next();
+      else {
+        req.user = decoded._doc;
+        delete req.user.password;
+        next();
+      }
     });
   } else {
     // did not receive a token.
@@ -29,6 +31,10 @@ api.getUser = function(req, res, next) {
 api.logIn = function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
+  if(!email || !password) {
+    res.status(400).json({});
+    return;
+  }
   user.findOne({
     email: email
   }, function(err, user) {
@@ -37,7 +43,7 @@ api.logIn = function(req, res, next) {
       res.status(400).json({});
     } else {
       var token = jwt.sign(user, secret,{
-        expiresInMinutes: 60
+        expiresIn: 3600
       });
       res.status(200).json({token: token});
     }
@@ -73,6 +79,10 @@ api.newUser = function(req, res, next) {
   var email = req.body.email;
   var username = req.body.username;
   var password = req.body.password;
+  if(!email || !password || !username) {
+    res.status(400).json({});
+    return;
+  }
   user.findOne({$or: [{email: email}, {username:username}]}, function(err, result) {
     if(result) {
       // user already exists failed request.
@@ -98,21 +108,27 @@ api.newUser = function(req, res, next) {
 };
 
 api.deleteUser = function(req, res, next) {
-  var id = req.user.id;
+  var id = req.user._id;
+  if(!id) {
+    res.status(400).json({});
+  }
   user.remove({_id:id}, function(err) {
     if(err) {
       // error removing user.
       res.status(400).json({});
     } else {
       // user removed
-      res.status(204).json({});
+      res.status(200).json({});
     }
   });
 };
 
 api.updateUser = function(req, res, next) {
-  var id = req.user.id;
-  var newUser = req.body;
+  var id = req.user._id;
+  var newUser = req.body.user;
+  if(!id || !newUser) {
+    res.status(400).json({});
+  }
   user.update({_id:id}, newUser, function(err, result) {
     if(err) {
       // unable to update user.
