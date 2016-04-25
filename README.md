@@ -50,8 +50,7 @@
 ##Integration Testing Via Selenium
 - Perform the development setup above
 - You must download selenium-server-standalone-2.x.x.jar from http://docs.seleniumhq.org/download/
-- Run the selenium-server-standalone jar you have downloaded.
+- Run the selenium-server-standalone jar you have downloaded. `java -jar selenium-standalone-2.x.x.jar` from a new terminal
 - You must also have firefox installed in order to run these tests.
 - Install webdriverio via `npm install webdriverio`
-- Run npm start, open a browser and navigate to localhost:8080, register a user with the email `email` username `username` and password `password`
 - From the 'src' directory, type 'node systemTests.js'
