@@ -190,3 +190,78 @@ describe("delete da user", function(){
     .expect(204, done);
   });
 });
+
+
+describe('Update User', function() {
+  before(function(done) {
+    user.remove({}, done);
+  });
+  before(function(done){
+      setTimeout(function(){
+        api.post('/users')
+          .send({
+            email:'test@test.com',
+            password: 'passwordtest',
+            username: 'testusername'
+          })
+          .expect(200, function(){
+            var tok = api.post('/users/login')
+            .send({
+                email:'test@test.com',
+                password: 'passwordtest'
+            });
+            done();
+          });
+      }, 10000);
+  });
+  it('should return 200 and update the user', function(done) {
+      api.put('/users').send({
+        token: tok
+        email: 'test@test.com'
+        password: 'newpassword'
+        username: 'testusername'
+      }).expect(200, done);
+  });
+});
+
+
+describe("getleaderboards 0 length test", function(){
+  before(function(done) {
+    user.remove({}, done);
+  });
+  before(function(done){
+    setTimeout(function(){
+      var arr = api.get('/leaderboard');
+      done();
+    }, 10000);
+  });
+  it('should return an array of 0 length', function(done){
+    expect(arr.length).equals(0);
+    done();
+  });
+});
+
+describe("getleaderboards 1 length test", function(){
+  before(function(done) {
+    user.remove({}, done);
+  });
+  before(function(done){
+    setTimeout(function(){
+      api.post('/users')
+        .send({
+          email:'test@test.com',
+          password: 'passwordtest',
+          username: 'testusername'
+      });.expect(200, function(){
+          var arr = api.get('/leaderboard');
+      });
+      done();
+    }, 10000);
+  });
+  it('should return an array of 0 length', function(done){
+    expect(arr.length).equals(1);
+    done();
+  });
+});
+
+});
