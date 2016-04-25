@@ -20,6 +20,11 @@ app.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
+app.get('/playlists/:genre', function(req, res, next) {
+  var genre = req.params.genre;
+  res.send('<h1>' + genre + ' playlist</h1>');
+});
+
 // User related routes
 var userAPI = require(__dirname + '/lib/routes/userRoutes');
 app.post('/user', userAPI.verifyUser, userAPI.getUser);

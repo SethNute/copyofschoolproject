@@ -93,7 +93,7 @@ function isUserLoggedIn() {
 function styleForLoggedInUser() {
 
     $('#user-info').append($(
-        '<h5>User Information</h5>' +
+        '<h4>User Information</h4>' +
         '<div class="row">' +
             '<p><b class="col s2">Username : </b><div class="col s10">' + localStorage.getItem("username") + 
             '</div></p><p><b class="col s2">Email : </b><div class="col s10">' + localStorage.getItem("email") + '</div>' + 
@@ -102,9 +102,56 @@ function styleForLoggedInUser() {
 
     $('#user-info').append($(
         '<div class="row col s12 divider"></div>' +
-        '<h5>Play Lists</h5>' +
-        '<div class="row">' +
-            
+        '<h4>Playlists</h4>' +
+        '<div class="row">' +    
+            '<div class="col s12 m6 l4 playlist-button waves-effect waves-light">' +
+                '<div class="centered" style="text-align:center;">' +
+                    '<a href="/playlists/pop">' +
+                    '<img src="http://clipartion.com/wp-content/uploads/2015/11/microphone-clip-art-entry-2-clipart-space-com.png" height="75" width="75"></img>' +
+                    '<h5 class="black-text">Pop</h5>' +
+                    '</a>' +
+                '</div>' +
+            '</div>' +
+ 
+            '<div class="col s12 m6 l4 playlist-button waves-effect waves-light">' +
+                '<div class="centered" style="text-align:center;">' +
+                    '<a href="/playlists/hiphop">' +
+                    '<img src="http://allthingsclipart.com/04/boombox.08.jpg" height="75" width="75"></img>' +
+                    '<h5 class="black-text">Hip Hop</h5>' +
+                '</div>' +
+            '</div>' +
+   
+            '<div class="col s12 m6 l4 playlist-button waves-effect waves-light">' +
+                '<div class="centered" style="text-align:center">' +
+                    '<a href="/playlists/country">' +
+                    '<img src="http://images.clipartpanda.com/guitar-clipart-guitar-clipart-clipart-guitar-gfta-2-spat-d-ii-supplemental.jpg" height="75" width="75"></img>' +
+                    '<h5 class="black-text">Country</h5>' +
+                '</div>' +
+            '</div>' +
+
+            '<div class="col s12 m6 l4 playlist-button waves-effect waves-light">' +
+                '<div class="centered" style="text-align:center;">' +
+                    '<a href="/playlists/classical">' +
+                    '<img src="http://cliparts.co/cliparts/pco/5zr/pco5zrMXi.jpg" height="75" width="75"></img>' +
+                    '<h5 class="black-text">Classical</h5>' +
+                '</div>' +
+            '</div>' +
+   
+            '<div class="col s12 m6 l4 playlist-button waves-effect waves-light">' +
+                '<div class="centered" style="text-align:center;">' +
+                    '<a href="/playlists/rock">' +
+                    '<img src="http://allthingsclipart.com/04/amplifier.01.jpg" height="75" width="75"></img>' +
+                    '<h5 class="black-text">Rock</h5>' +
+                '</div>' +
+            '</div>' +
+    
+            '<div class="col s12 m6 l4 playlist-button waves-effect waves-light">' +
+                '<div class="centered" style="text-align:center;">' +
+                    '<a href="/playlists/edm">' +
+                    '<img src="http://allthingsclipart.com/04/speakers.03.jpg" height="75" width="75"></img>' +
+                    '<h5 class="black-text">EDM/Dance</h5>' +
+                '</div>' +
+            '</div>' +
         '</div>'
     ));
 
@@ -117,7 +164,7 @@ function styleForLoggedInUser() {
 function styleLeaderboardFor(users) {
     $('#user-info').append(
         $('<div class="row col s12 divider"></div>' +
-          '<h4 style="text-align:center"><u>Leaderboard</u></h4>' +
+          '<h4>Leaderboard</h4>' +
           '<table class="bordered highlight centered" id="leaderboards-table"><thead><tr><th>Rank</th><th>Username</th><th>Coins</th></tr></thead></table>')
     );
 

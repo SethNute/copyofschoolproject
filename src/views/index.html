@@ -9,6 +9,17 @@
   </script>
 
   <style>
+    .playlist-button {
+        padding:40px;
+        width:100px;
+        height:150px;
+        padding-right:200;
+        margin-bottom:10px;
+    }
+    .playlist-button:hover {
+        cursor:pointer;
+    }
+
     .error-shadow {
         -moz-box-shadow:    inset 0 0 15px red !important;
         -webkit-box-shadow: inset 0 0 15px red !important;
@@ -35,9 +46,8 @@
         <div class="row">
             <div class="col s12 m6 section" id="login-container">
                 <h4>Login</h4>
-                <form>
                     <div class="input-field">
-                        <input type="email" class="validate" id="login-email-input"/>
+                        <input type="email" id="login-email-input"/>
                         <label for="login-email-input">Email</label>
                     </div>
                     <div class="input-field">
@@ -45,11 +55,10 @@
                         <label for="login-password-input">Password</label>
                     </div>
                     <button class="waves-effect waves-light btn" id="login-button">Login</button>
-                </form>
+                
             </div>
             <div class="col s12 m6 section" id="register-container">
                 <h4 class="header">Register</h4>
-                <form>
                     <div class="input-field">
                         <input type="email" class="validate" id="register-email-input"/>
                         <label for="register-email-input">Email</label>
@@ -63,7 +72,6 @@
                         <label for="register-password-input">Password</label>
                     </div>
                     <button class="waves-effect waves-light btn" id="register-button">Register</button>
-                </form>
             </div>
         </div>
     </div>
