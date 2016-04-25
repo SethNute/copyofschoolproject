@@ -47,7 +47,7 @@
 - Run the command, 'npm install -g mocha'
 - Run the command, 'mocha'
 
-##System Testing
+##Integration Testing Via Selenium
 - Perform the development setup above
 - You must download selenium-server-standalone-2.x.x.jar from http://docs.seleniumhq.org/download/
 - Run the selenium-server-standalone jar you have downloaded.
