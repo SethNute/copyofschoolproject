@@ -1,10 +1,10 @@
+require('../app.js');
 var should = require('chai').should();
 var expect = require('chai').expect;
 var assert = require('chai').assert;
 var supertest = require('supertest');
 var api = supertest('http://localhost:8080');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/CollaborativeMusicPlayer');
 var user = require("../lib/schemas/userSchema");
 
 describe('Registration', function() {
