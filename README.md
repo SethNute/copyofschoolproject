@@ -46,3 +46,6 @@
 - Navigate to the src directory
 - Run the command, 'npm install -g mocha'
 - Run the command, 'mocha'
+- 
+
+##Integration Testing via Selenium
