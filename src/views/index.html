@@ -1,145 +1,11 @@
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script src="helpers.js"></script>
+  <script src="index.js"></script>
 
   <script type="text/javascript">
-    $(document).ready(function () {
-        //clear forms
-        $(':input').val('');
-
-        addButtonListeners();
-
-        if (isUserLoggedIn()) {
-            getUserInfo(localStorage.getItem("sessionToken"));
-        }
-    });
-
-    function addButtonListeners() {
-        $("#login-button").click(function(e) {
-            logUserIn($("#login-email-input").val(), $("#login-password-input").val());
-        }); 
-
-        $("#register-button").click(function(e) {
-            createNewUser($("#register-email-input").val(), $("#register-username-input").val(), $("#register-password-input").val());
-        }); 
-
-        $('#logout-button').click(function(e) {
-            logUserOut();
-        });
-    }
-
-    function logUserIn(email, password) {
-        var request = $.ajax({
-            type: "POST",
-            url: "/users/login",
-            data: {"email": email, "password": password},
-            success: function (response) {
-                localStorage.setItem("sessionToken", response.token);
-                getUserInfo(localStorage.getItem("sessionToken"));
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                styleForIncorrectUsernameOrPassword();
-            }
-        });
-    }
-
-    function createNewUser(email, username, password) {
-        var request = $.ajax({
-            type: "POST",
-            url: "/users",
-            data: {"email": email, "username": username, "password": password},
-            success: function (response) {
-                logUserIn(email, password);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                styleForUserAlreadyExists();
-            }
-        });
-    }
-
-    function getUserInfo(token) {
-        var request = $.ajax({
-            type: "POST",
-            url: "/user",
-            data: {"token": token},
-            success: function (response) {
-                localStorage.setItem("username", response.username);
-                localStorage.setItem("email", response.email);
-
-                styleForLoggedInUser();
-            }
-        });
-    }
-
-    function getLeaderboards() {
-        var request = $.ajax({
-            type: "GET",
-            url: "/users",
-            success: function (response) {
-                console.log(response);
-                styleLeaderboardFor(response);
-            }
-        });
-    }
-
-    function logUserOut() {
-        localStorage.removeItem("sessionToken");
-        localStorage.removeItem("username");
-        localStorage.removeItem("email");
-
-        location.reload();
-    }
-
-    function isUserLoggedIn() {
-        return localStorage.getItem("sessionToken") !== null;
-    }
-
-    function styleForLoggedInUser() {
-        console.log("style for logged in user");
-        $('#user-info').append($('<p>' + localStorage.getItem("username") + 
-            '</p><p>' + localStorage.getItem("email") + '</p>'));
-
-        $('#login-or-register-container').hide();
-        $('#logout-button').show();
-
-        getLeaderboards();
-    }
-
-    function styleLeaderboardFor(users) {
-        $('#user-info').append(
-            $('<br><hr><br>' +
-              '<h1 style="text-align:center">Leaderboards</h1>' +
-              '<table id="leaderboards-table"><tr><th>Rank</th><th>Username</th><th>Coins</th></tr></table>')
-        );
-
-        var rank = 1;
-        users.forEach(function(user) {
-            if (user.username && user.coins) {
-                addLeaderboardRow(rank, user.username, user.coins);
-                rank++;
-            }
-        }); 
-    }
-
-    function addLeaderboardRow(rank, username, coins) {
-        $('#leaderboards-table').append(
-            $('<tr><td>' + rank + '</td><td>' + username + '</td><td>' + coins + '</tr>')
-        );
-    }
-
-    function styleForIncorrectUsernameOrPassword() {
-        $('#login-container').children('input').each(function () {
-            $(this).addClass('error-shadow');
-        });
-    }
-
-    function styleForUserAlreadyExists() {
-        $('#register-container').children('input').each(function () {
-            $(this).addClass('error-shadow');
-        });
-    }
+    
   </script>
 
   <style>
@@ -162,26 +28,55 @@
 </head>
 
 <body>
-  <h2>Collaborative Music Player!</h2>
-
-  <div id="login-or-register-container">
-    <div id="login-container">
-        <input placeholder="Email" type="text" id="login-email-input"></input>
-        <input placeholder="Password" type="text" id="login-password-input"></input>
-        <button id="login-button">Login</button>
+  <div class="container">
+    <h3 class="row col s12">Collaborative Music Player</h3>
+    <div class="row col s12 divider"></div>
+    <div id="login-or-register-container">
+        <div class="row">
+            <div class="col s12 m6 section" id="login-container">
+                <h4>Login</h4>
+                <form>
+                    <div class="input-field">
+                        <input type="text" id="login-email-input"/>
+                        <label for="login-email-input">Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="login-password-input"/>
+                        <label for="login-password-input">Password</label>
+                    </div>
+                    <button class="waves-effect waves-light btn" id="login-button">Login</button>
+                </form>
+            </div>
+            <div class="col s12 m6 section" id="register-container">
+                <h4 class="header">Register</h4>
+                <form>
+                    <div class="input-field">
+                        <input type="text" id="register-email-input"/>
+                        <label for="register-email-input">Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="register-username-input"/>
+                        <label for="register-username-input">Desired Username</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="register-password-input"/>
+                        <label for="register-password-input">Password</label>
+                    </div>
+                    <button class="waves-effect waves-light btn" id="register-button">Register</button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <br>
-    <br>
-
-    <div id="register-container">
-        <input placeholder="Email" type="text" id="register-email-input"></input>
-        <input placeholder="Desired Username" type="text" id="register-username-input"></input>
-        <input placeholder="Password" type="text" id="register-password-input"></input>
-        <button id="register-button">Register</button>
+    <div class="row">
+        <div class="col s12 right">
+            <button class="waves-effect waves-light btn" id="logout-button"  style="display:none">Logout</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div id="user-info"></div>
+        </div>
     </div>
   </div>
-  
-  <button id="logout-button"  style="display:none">Logout</button>
-  <div id="user-info"></div>
 </body>
