@@ -54,6 +54,7 @@
   - npm install -g selenium-standalone
   - selenium-standalone install
   - selenium-standalone start
+- If selenium-standalone-server is not running, the test will stall after printing "Running integration tests now"
 - You must also have firefox installed in order to run these tests.
 - Run 'npm test' from within the 'src' directory.
 - A firefox browser should open, and run through/report results of tests for registering, logging in/out, and selecting a playlist
