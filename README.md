@@ -49,13 +49,11 @@
 
 ##Integration Testing Via Selenium
 - Perform the development setup above
-- You must download selenium-server-standalone-2.x.x.jar from http://docs.seleniumhq.org/download/
-- Run the selenium-server-standalone jar you have downloaded.
-- Or run these 3 commands in succession in a separate terminal:
+- You must have a selenium-stand-alone server running in order to run these tests.
+- You may start this server by running these 3 commands in succession in a separate terminal:
   - npm install -g selenium-standalone
   - selenium-standalone install
   - selenium-standalone start
 - You must also have firefox installed in order to run these tests.
-- Install webdriverio via `npm install webdriverio` <- this should be installed already if you have done an 'npm install'
-- From the 'src' directory, run 'npm test'
+- Run 'npm test' from within the 'src' directory.
 - A firefox browser should open, and run through/report results of tests for registering, logging in/out, and selecting a playlist
