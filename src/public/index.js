@@ -82,7 +82,7 @@ function logUserOut() {
     localStorage.removeItem("username");
     localStorage.removeItem("email");
     localStorage.removeItem("coins");
-
+    $(':input').val('');
     location.reload();
 }
 
@@ -91,6 +91,7 @@ function isUserLoggedIn() {
 }
 
 function styleForLoggedInUser() {
+
     $('#user-info').append($(
         '<h5>User Information</h5>' +
         '<div class="row">' +
@@ -98,6 +99,14 @@ function styleForLoggedInUser() {
             '</div></p><p><b class="col s2">Email : </b><div class="col s10">' + localStorage.getItem("email") + '</div>' + 
             '</p><p><b class="col s2">Coins : </b><div class="col s10">' + localStorage.getItem("coins") + '</div></p>' +
         '</div>'));
+
+    $('#user-info').append($(
+        '<div class="row col s12 divider"></div>' +
+        '<h5>Play Lists</h5>' +
+        '<div class="row">' +
+            
+        '</div>'
+    ));
 
     $('#login-or-register-container').hide();
     $('#logout-button').show();
@@ -108,7 +117,7 @@ function styleForLoggedInUser() {
 function styleLeaderboardFor(users) {
     $('#user-info').append(
         $('<div class="row col s12 divider"></div>' +
-          '<h4 style="text-align:center"><u>Leaderboards</u></h4>' +
+          '<h4 style="text-align:center"><u>Leaderboard</u></h4>' +
           '<table class="bordered highlight centered" id="leaderboards-table"><thead><tr><th>Rank</th><th>Username</th><th>Coins</th></tr></thead></table>')
     );
 
