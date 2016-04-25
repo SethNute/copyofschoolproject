@@ -32,14 +32,15 @@ describe('User same email', function(){
       email:'test@test.com',
       password: 'passwordtest',
       username: 'testusername'
+    }).expect(200, function(){
+        api.post('/users')
+        .send({
+          email:'test@test.com',
+          password: 'amitThings'
+          username: 'amitIsSilly'
+      })
+      .expect(400, done);
     });
-    api.post('/users')
-    .send({
-      email:'test@test.com',
-      password: 'amitThings'
-      username: 'amitIsSilly'
-    })
-    .expect(400, done);
   });
 });
 
@@ -53,14 +54,15 @@ describe('User same username', function(){
       email:'test1@test.com',
       password: 'passwordtest',
       username: 'sameUsername'
+    }).expect(200, function(){
+      api.post('/users')
+      .send({
+          email:'test2@test.com',
+          password: 'amitThings'
+          username: 'sameUsername'
+      })
+      .expect(400, done);
     });
-    api.post('/users')
-    .send({
-      email:'test2@test.com',
-      password: 'amitThings'
-      username: 'sameUsername'
-    })
-    .expect(400, done);
   });
 });
 
@@ -68,10 +70,14 @@ describe("getUsers 0 length test", function(){
   before(function(done) {
     user.remove({}, done);
   });
+  before(function(done){
+    setTimeout(function(){
+      var arr = api.get('/users');
+      done();
+    }, 10000);
+  });
   it('should return an array of 0 length', function(done){
-    var arr = api.get('/users');
-    assert.equal(0, arr.length);
-    done();
+    expect(arr.length).equals(0);
   });
 });
 
@@ -85,13 +91,14 @@ describe("login receive a 200", function(){
       email:'test@test.com',
       password: 'passwordtest',
       username: 'username'
+    }).expect(200, function(){
+      api.post('/users/login')
+      .send({
+          email:'test@test.com',
+          password: 'passwordtest'
+      })
+      .expect(200, done);
     });
-    api.post('/users/login')
-    .send({
-        email:'test@test.com',
-        password: 'passwordtest'
-    })
-    .expect(200, done);
   });
 });
 
@@ -99,20 +106,24 @@ describe("login receive a token", function(){
   before(function(done){
     user.remove({}, done);
   });
-  it('should return a token', function(done){
-    api.post('/users')
-    .send({
-      email:'test@test.com',
-      password: 'passwordtest',
-      username: 'username'
-    });
-    var token = api.post('/users/login')
-    .send({
-        email:'test@test.com',
+  before(function (done){
+    setTimeout(function(){
+      api.post('/users')
+      .send({
+        email:'test@test.com'
         password: 'passwordtest'
-    });
-    assert.notEqual(token, null);
-    done();
+        username: 'username'
+      });
+      var token = api.post('/users/login')
+      .send({
+          email:'test@test.com',
+          password: 'passwordtest'
+      });
+      done();
+    }, 10000);
+  });
+  it('should return a token', function(done){
+    assert.notEqual(token);
   });
 });
 
@@ -126,13 +137,14 @@ describe("login failed", function(){
       email:'test@test.com',
       password: 'passwordtest',
       username: 'username'
+    }).expect(200, function(){
+      api.post('/users/login')
+      .send({
+          email:'test@test.com',
+          password: 'passwordFAIL'
+      })
+      .expect(400, done);
     });
-    api.post('/users/login')
-    .send({
-        email:'test@test.com',
-        password: 'passwordFAIL'
-    })
-    .expect(400, done);
   });
 });
 
@@ -140,23 +152,27 @@ describe("delete da user", function(){
   before(function(done){
     user.remove({}, done);
   });
-  it('should return a status of 204', function(done){
-    api.post('/users')
-    .send({
-      email:'test@test.com',
-      password: 'passwordtest',
-      username: 'username'
-    });
-    var tokenToPass = api.post('/users/login')
-    .send({
+  before(function(done){
+    setTimeout(function(){
+      api.post('/users')
+      .send({
         email:'test@test.com',
-        password: 'passwordtest'
-    });
+        password: 'passwordtest',
+        username: 'username'
+      });
+      var tokenToPass = api.post('/users/login')
+      .send({
+          email:'test@test.com',
+          password: 'passwordtest'
+      });
+      done();
+    },10000);
+  });
+  it('should return a status of 204', function(done){
     api.delete('/users')
     .send({
         token: tokenToPass
     })
     .expect(204, done);
-
   });
 });
