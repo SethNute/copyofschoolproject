@@ -1,3 +1,5 @@
+require('./app.js');
+
 var webdriverio = require('webdriverio');
 var options = {
     desiredCapabilities: {
@@ -11,8 +13,10 @@ console.log('Running system tests.');
 webdriverio
     .remote(options)
     .init()
-    .url('http://www.google.com')
+    .url('http://localhost:8080')
     .getTitle().then(function(title) {
         console.log('Title was: ' + title);
     })
-    .end();
+    .end(function() {
+        process.exit();
+    });
