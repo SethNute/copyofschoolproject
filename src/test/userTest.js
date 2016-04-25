@@ -38,6 +38,13 @@ describe('User same email', function(){
           email:'test@test.com',
           password: 'amitThings'
           username: 'amitIsSilly'
+    })
+    .expect(200, function() {
+      api.post('/users')
+      .send({
+        email:'test@test.com',
+        password: 'amitThings',
+        username: 'amitIsSilly'
       })
       .expect(400, done);
     });
@@ -63,6 +70,13 @@ describe('User same username', function(){
       })
       .expect(400, done);
     });
+    api.post('/users')
+    .send({
+      email:'test2@test.com',
+      password: 'amitThings',
+      username: 'sameUsername'
+    })
+    .expect(400, done);
   });
 });
 
